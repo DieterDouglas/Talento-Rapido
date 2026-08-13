@@ -17,7 +17,7 @@ Marketplace de serviços: usuários podem cadastrar serviços que prestam, procu
 ### Backend
 
 1. Instale PHP e Composer (recomendado: [Laravel Herd](https://herd.laravel.com/windows) para Windows)
-2. Suba um PostgreSQL isolado via Docker (porta 5433, evita conflito com outros projetos):
+2. Suba um PostgreSQL isolado via Docker:
    ```
    docker run --name talento-rapido-postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=talento_rapido -p 5433:5432 -d postgres:16-alpine
    ```
@@ -26,9 +26,13 @@ Marketplace de serviços: usuários podem cadastrar serviços que prestam, procu
    composer install
    cp .env.example .env   # se necessário
    php artisan key:generate
-   php artisan migrate
+   php artisan migrate --seed
    php artisan serve
    ```
+
+Usuários de teste criados pelo seeder (senha `password` para ambos):
+- `provider@example.com` — tem serviços cadastrados
+- `client@example.com` — tem uma contratação concluída e avaliada
 
 ### Frontend
 
