@@ -16,8 +16,11 @@ Marketplace de serviços: usuários podem cadastrar serviços que prestam, procu
 
 ### Backend
 
-1. Instale PHP, Composer e PostgreSQL (recomendado: [Laravel Herd](https://herd.laravel.com/windows) para PHP/Composer no Windows)
-2. Crie o banco `talento_rapido` no PostgreSQL
+1. Instale PHP e Composer (recomendado: [Laravel Herd](https://herd.laravel.com/windows) para Windows)
+2. Suba um PostgreSQL isolado via Docker (porta 5433, evita conflito com outros projetos):
+   ```
+   docker run --name talento-rapido-postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=talento_rapido -p 5433:5432 -d postgres:16-alpine
+   ```
 3. ```
    cd backend
    composer install
