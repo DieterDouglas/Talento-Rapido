@@ -1,10 +1,15 @@
 import { Button } from '../ui/Button'
+import { LinkButton } from '../ui/LinkButton'
 import { Logo } from '../ui/Logo'
 import { NAV_LINKS } from '../../constants/navigation'
+import { AppRoute } from '../../constants/routes'
 import { ButtonVariant } from '../../enums/ButtonVariant'
+import { useAuth } from '../../hooks/useAuth'
 import { NavItem } from './NavItem'
 
 export function Header() {
+  const { user, isLoading, signOut } = useAuth()
+
   return (
     <header className="flex items-center justify-between bg-background px-10 py-4">
       <div className="flex items-center gap-12">
@@ -17,8 +22,23 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-3">
-        <Button variant={ButtonVariant.Primary}>Login</Button>
-        <Button variant={ButtonVariant.Primary}>Criar Conta</Button>
+        {isLoading ? null : user ? (
+          <>
+            <span className="text-sm font-medium text-text">Olá, {user.name}</span>
+            <Button variant={ButtonVariant.Secondary} onClick={() => signOut()}>
+              Sair
+            </Button>
+          </>
+        ) : (
+          <>
+            <LinkButton to={AppRoute.Login} variant={ButtonVariant.Primary}>
+              Login
+            </LinkButton>
+            <LinkButton to={AppRoute.Register} variant={ButtonVariant.Primary}>
+              Criar Conta
+            </LinkButton>
+          </>
+        )}
       </div>
     </header>
   )

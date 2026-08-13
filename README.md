@@ -39,5 +39,6 @@ Usuários de teste criados pelo seeder (senha `password` para ambos):
 ```
 cd frontend
 npm install
+cp .env.example .env   # se necessário
 npm run dev
 ```
