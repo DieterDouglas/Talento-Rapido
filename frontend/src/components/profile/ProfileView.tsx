@@ -26,7 +26,7 @@ export function ProfileView({ user, onEdit }: ProfileViewProps) {
   return (
     <div className="w-full">
       <div className="flex justify-start items-center flex-col gap-4">
-        <div className="py-8 px-28 flex flex-col text-left items-center gap-6 w-fit bg-primary-light rounded-2xl">
+        <div className="py-8 px-28 mx-8 flex flex-col text-left items-center gap-6 w-fit bg-primary-light rounded-2xl">
           <div className='border border-primary rounded-full'>
             <Avatar src={user.avatar_url} name={user.name} size={140} />
           </div>
@@ -35,7 +35,7 @@ export function ProfileView({ user, onEdit }: ProfileViewProps) {
             <p className="text-sm text-text-muted">{user.email}</p>
           </div>
 
-          <div className="flex items-center gap-2 text-sm">
+          <div className="flex items-center gap-2 text-sm text-center">
             {user.phone ? (
               user.is_whatsapp ? (
                 <a
@@ -80,7 +80,7 @@ export function ProfileView({ user, onEdit }: ProfileViewProps) {
         <div className="mt-8 w-full max-w-2xl flex flex-col items-center">
           <h1 className="text-xl font-bold">Pedidos Recebidos</h1>
           {receivedServiceRequests && receivedServiceRequests.length > 0 ? (
-            <div className="mt-4 flex w-full flex-col gap-4">
+            <div className="mt-4 flex flex-col md:flex-row w-full gap-4">
               {receivedServiceRequests.map((request) => (
                 <ReceivedServiceRequestItem key={request.id} request={request} />
               ))}
@@ -93,7 +93,7 @@ export function ProfileView({ user, onEdit }: ProfileViewProps) {
         <div className="mt-8 w-full max-w-2xl flex flex-col items-center">
           <h1 className="text-xl font-bold">Serviços Contratados</h1>
           {myServiceRequests && myServiceRequests.length > 0 ? (
-            <div className="mt-4 flex gap-4">
+            <div className="mt-4 flex flex-col md:flex-row gap-4">
               {myServiceRequests.map((request) => (
                 <HiredServiceItem key={request.id} request={request} />
               ))}

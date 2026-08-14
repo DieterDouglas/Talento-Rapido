@@ -16,7 +16,7 @@ export function ReceivedServiceRequestItem({ request }: ReceivedServiceRequestIt
   const updateStatus = useUpdateServiceRequestStatus()
 
   return (
-    <div className="rounded-xl border border-primary-light bg-surface p-4">
+    <div className="rounded-xl border border-primary-light bg-surface px-8 py-4">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Avatar src={request.requester.avatar_url} name={request.requester.name} size={36} />
