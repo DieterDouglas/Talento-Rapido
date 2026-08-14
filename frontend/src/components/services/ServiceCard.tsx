@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import type { Service } from '../../types/Service'
 import { formatCurrency } from '../../lib/currency'
 import { serviceDetailPath } from '../../constants/routes'
+import { ServiceRating } from './ServiceRating'
 
 type ServiceCardProps = {
   service: Service
@@ -19,6 +20,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
       </span>
 
       <h3 className="text-lg font-bold text-text">{service.title}</h3>
+      <ServiceRating service={service} />
       <p className="line-clamp-2 text-sm text-text-muted">{service.description}</p>
 
       <div className="mt-auto flex items-center justify-between pt-2">

@@ -6,10 +6,14 @@ import { ServiceGrid } from '../components/services/ServiceGrid'
 import { useServices } from '../hooks/useServices'
 import { useCategories } from '../hooks/useCategories'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
+import { ServiceSortField } from '../enums/ServiceSortField'
+import { SortDirection } from '../enums/SortDirection'
 
 export function Services() {
   const [search, setSearch] = useState('')
   const [categoryId, setCategoryId] = useState<number | undefined>(undefined)
+  const [sortField, setSortField] = useState<ServiceSortField | undefined>(undefined)
+  const [sortDirection, setSortDirection] = useState<SortDirection>(SortDirection.Desc)
   const [page, setPage] = useState(1)
 
   const debouncedSearch = useDebouncedValue(search, 400)
@@ -22,6 +26,8 @@ export function Services() {
   } = useServices({
     search: debouncedSearch,
     categoryId,
+    sortField,
+    sortDirection,
     page,
   })
 
@@ -32,6 +38,16 @@ export function Services() {
 
   function handleCategoryChange(value: number | undefined) {
     setCategoryId(value)
+    setPage(1)
+  }
+
+  function handleSortFieldChange(field: ServiceSortField | undefined) {
+    setSortField(field)
+    setPage(1)
+  }
+
+  function handleSortDirectionChange(direction: SortDirection) {
+    setSortDirection(direction)
     setPage(1)
   }
 
@@ -49,6 +65,10 @@ export function Services() {
             categoryId={categoryId}
             onCategoryChange={handleCategoryChange}
             categories={categories ?? []}
+            sortField={sortField}
+            onSortFieldChange={handleSortFieldChange}
+            sortDirection={sortDirection}
+            onSortDirectionChange={handleSortDirectionChange}
           />
         </div>
 

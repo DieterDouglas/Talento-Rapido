@@ -11,4 +11,6 @@ export type Service = {
   category: Category
   provider: User
   reviews?: Review[]
+  reviews_avg_rating: string | null
+  reviews_count: number
 }

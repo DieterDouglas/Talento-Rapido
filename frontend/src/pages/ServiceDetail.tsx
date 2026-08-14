@@ -5,6 +5,7 @@ import { Header } from '../components/layout/Header'
 import { Button } from '../components/ui/Button'
 import { LinkButton } from '../components/ui/LinkButton'
 import { ReviewList } from '../components/services/ReviewList'
+import { ServiceRating } from '../components/services/ServiceRating'
 import { ButtonVariant } from '../enums/ButtonVariant'
 import { useService } from '../hooks/useService'
 import { useCreateServiceRequest } from '../hooks/useCreateServiceRequest'
@@ -47,6 +48,10 @@ export function ServiceDetail() {
             </span>
 
             <h1 className="mt-3 text-3xl font-bold text-text">{service.title}</h1>
+
+            <div className="mt-2">
+              <ServiceRating service={service} />
+            </div>
 
             <div className="mt-2 flex items-center gap-4 text-sm text-text-muted">
               <span className="font-medium text-text">{service.provider.name}</span>
