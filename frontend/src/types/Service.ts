@@ -13,4 +13,5 @@ export type Service = {
   reviews?: Review[]
   reviews_avg_rating: string | null
   reviews_count: number
+  neighbor_distance?: number
 }

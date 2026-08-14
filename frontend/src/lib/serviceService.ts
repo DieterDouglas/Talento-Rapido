@@ -52,3 +52,9 @@ export async function createService(payload: CreateServicePayload): Promise<Serv
 
   return data
 }
+
+export async function smartSearchServices(query: string): Promise<Service[]> {
+  const { data } = await api.post<Service[]>('/services/smart-search', { query })
+
+  return data
+}

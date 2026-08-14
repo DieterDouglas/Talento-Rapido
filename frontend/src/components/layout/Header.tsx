@@ -1,3 +1,4 @@
+import { Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Avatar } from '../ui/Avatar'
 import { Button } from '../ui/Button'
@@ -20,6 +21,13 @@ export function Header() {
           {NAV_LINKS.map((link) => (
             <NavItem key={link.href} link={link} />
           ))}
+          <Link
+            to={AppRoute.SmartSearch}
+            className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-dark"
+          >
+            <Sparkles className="h-4 w-4" />
+            Busca com IA
+          </Link>
         </nav>
       </div>
 

@@ -6,6 +6,7 @@ export const AppRoute = {
   CreateService: '/services/new',
   ServiceDetail: '/services/:id',
   Profile: '/profile',
+  SmartSearch: '/busca-inteligente',
 } as const
 
 export type AppRoute = (typeof AppRoute)[keyof typeof AppRoute]

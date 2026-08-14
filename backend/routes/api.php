@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceRequestController;
+use App\Http\Controllers\SmartSearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -16,6 +17,7 @@ Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
 
 Route::get('/services', [ServiceController::class, 'index']);
+Route::post('/services/smart-search', [SmartSearchController::class, 'search']);
 Route::get('/services/{service}', [ServiceController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {

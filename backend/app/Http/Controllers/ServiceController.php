@@ -7,12 +7,18 @@ use App\Enums\SortDirection;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Models\Service;
+use App\Services\GeminiEmbeddingService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class ServiceController extends Controller
 {
+    public function __construct(private readonly GeminiEmbeddingService $embeddings)
+    {
+    }
+
     public function index(Request $request): LengthAwarePaginator
     {
         $sortField = ServiceSortField::tryFrom((string) $request->query('sort'));
@@ -40,7 +46,11 @@ class ServiceController extends Controller
 
     public function store(StoreServiceRequest $request): Service
     {
-        return $request->user()->services()->create($request->validated());
+        $service = $request->user()->services()->create($request->validated());
+
+        $this->embedService($service);
+
+        return $service;
     }
 
     public function show(Service $service): Service
@@ -56,7 +66,26 @@ class ServiceController extends Controller
     {
         $service->update($request->validated());
 
+        if ($service->wasChanged(['title', 'description'])) {
+            $this->embedService($service);
+        }
+
         return $service;
+    }
+
+    private function embedService(Service $service): void
+    {
+        try {
+            $vector = $this->embeddings->embed("{$service->title}. {$service->description}");
+            $service->update(['embedding' => $vector]);
+        } catch (\Throwable $e) {
+            // Um serviço sem embedding continua funcionando normalmente,
+            // só fica de fora da busca inteligente até ser reindexado.
+            Log::warning('Falha ao gerar embedding do serviço', [
+                'service_id' => $service->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     public function destroy(Service $service): Response
