@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { MapPin } from 'lucide-react'
 import { Header } from '../components/layout/Header'
+import { Avatar } from '../components/ui/Avatar'
 import { Button } from '../components/ui/Button'
 import { LinkButton } from '../components/ui/LinkButton'
 import { ReviewForm } from '../components/services/ReviewForm'
@@ -61,7 +62,8 @@ export function ServiceDetail() {
               <ServiceRating service={service} />
             </div>
 
-            <div className="mt-2 flex items-center gap-4 text-sm text-text-muted">
+            <div className="mt-2 flex items-center gap-2 text-sm text-text-muted">
+              <Avatar src={service.provider.avatar_url} name={service.provider.name} size={24} />
               <span className="font-medium text-text">{service.provider.name}</span>
               {service.location && (
                 <span className="flex items-center gap-1">

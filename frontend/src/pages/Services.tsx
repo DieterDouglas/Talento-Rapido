@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import { Header } from '../components/layout/Header'
+import { LinkButton } from '../components/ui/LinkButton'
 import { Pagination } from '../components/ui/Pagination'
 import { ServiceFilters } from '../components/services/ServiceFilters'
 import { ServiceGrid } from '../components/services/ServiceGrid'
+import { AppRoute } from '../constants/routes'
+import { ButtonVariant } from '../enums/ButtonVariant'
 import { useServices } from '../hooks/useServices'
 import { useCategories } from '../hooks/useCategories'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
@@ -56,7 +59,12 @@ export function Services() {
       <Header />
 
       <main className="mx-auto max-w-6xl px-10 py-10">
-        <h1 className="text-2xl font-bold text-text">Serviços</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-text">Serviços</h1>
+          <LinkButton to={AppRoute.CreateService} variant={ButtonVariant.Secondary}>
+            Cadastrar serviço
+          </LinkButton>
+        </div>
 
         <div className="mt-6">
           <ServiceFilters

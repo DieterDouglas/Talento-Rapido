@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Button } from '../ui/Button'
 import { ImageUploader } from '../ui/ImageUploader'
 import { Select } from '../ui/Select'
+import { TextArea } from '../ui/TextArea'
 import { ButtonVariant } from '../../enums/ButtonVariant'
 import { ImageUploaderShape } from '../../enums/ImageUploaderShape'
 import { useCreateReview } from '../../hooks/useCreateReview'
@@ -60,12 +61,13 @@ export function ReviewForm({ serviceId, serviceRequestId, onSuccess }: ReviewFor
         </div>
       </div>
 
-      <textarea
+      <TextArea
+        id="comment"
+        label="Comentário"
         value={comment}
         onChange={(event) => setComment(event.target.value)}
         placeholder="Conte como foi sua experiência (opcional)"
         rows={3}
-        className="rounded-xl border border-primary-light bg-surface px-4 py-3 text-sm text-text placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary"
       />
 
       {createReview.isError && (

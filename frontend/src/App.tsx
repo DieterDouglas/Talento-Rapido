@@ -4,6 +4,7 @@ import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Services } from './pages/Services'
+import { CreateService } from './pages/CreateService'
 import { ServiceDetail } from './pages/ServiceDetail'
 import { Profile } from './pages/Profile'
 import { AppRoute } from './constants/routes'
@@ -21,6 +22,7 @@ function App() {
             <Route path={AppRoute.Login} element={<Login />} />
             <Route path={AppRoute.Register} element={<Register />} />
             <Route path={AppRoute.Services} element={<Services />} />
+            <Route path={AppRoute.CreateService} element={<CreateService />} />
             <Route path={AppRoute.ServiceDetail} element={<ServiceDetail />} />
             <Route path={AppRoute.Profile} element={<Profile />} />
           </Routes>

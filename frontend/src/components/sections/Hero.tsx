@@ -1,4 +1,3 @@
-import { Button } from '../ui/Button'
 import { Highlight } from '../ui/Highlight'
 import { LinkButton } from '../ui/LinkButton'
 import { SearchInput } from '../ui/SearchInput'
@@ -24,9 +23,9 @@ export function Hero() {
           <LinkButton to={AppRoute.Services} variant={ButtonVariant.Primary} className="w-full">
             Estou procurando um serviço
           </LinkButton>
-          <Button variant={ButtonVariant.Secondary} className="w-full">
+          <LinkButton to={AppRoute.CreateService} variant={ButtonVariant.Secondary} className="w-full">
             Quero oferecer meus serviços
-          </Button>
+          </LinkButton>
         </div>
       </div>
 

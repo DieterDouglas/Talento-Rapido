@@ -38,3 +38,17 @@ export async function fetchCategories(): Promise<Category[]> {
 
   return data
 }
+
+export type CreateServicePayload = {
+  category_id: number
+  title: string
+  description: string
+  price: number
+  location: string | null
+}
+
+export async function createService(payload: CreateServicePayload): Promise<Service> {
+  const { data } = await api.post<Service>('/services', payload)
+
+  return data
+}

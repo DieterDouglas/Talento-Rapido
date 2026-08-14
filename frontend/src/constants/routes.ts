@@ -3,6 +3,7 @@ export const AppRoute = {
   Login: '/login',
   Register: '/register',
   Services: '/services',
+  CreateService: '/services/new',
   ServiceDetail: '/services/:id',
   Profile: '/profile',
 } as const
