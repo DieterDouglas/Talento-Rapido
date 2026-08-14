@@ -9,6 +9,7 @@ type AuthContextValue = {
   signIn: (payload: authService.LoginPayload) => Promise<void>
   signUp: (payload: authService.RegisterPayload) => Promise<void>
   signOut: () => Promise<void>
+  updateUser: (user: User) => void
 }
 
 export const AuthContext = createContext<AuthContextValue | null>(null)
@@ -50,8 +51,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setUser(null)
   }, [])
 
+  const updateUser = useCallback((user: User) => {
+    setUser(user)
+  }, [])
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ user, isLoading, signIn, signUp, signOut, updateUser }}>
       {children}
     </AuthContext.Provider>
   )

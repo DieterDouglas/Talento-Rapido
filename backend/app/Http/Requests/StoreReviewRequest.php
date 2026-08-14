@@ -27,6 +27,7 @@ class StoreReviewRequest extends FormRequest
         return [
             'rating' => ['required', 'integer', 'between:1,5'],
             'comment' => ['nullable', 'string'],
+            'image' => ['nullable', 'image', 'max:2048'],
         ];
     }
 

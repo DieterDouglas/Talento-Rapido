@@ -26,6 +26,7 @@ Marketplace de serviços: usuários podem cadastrar serviços que prestam, procu
    composer install
    cp .env.example .env   # se necessário
    php artisan key:generate
+   php artisan storage:link
    php artisan migrate --seed
    php artisan serve
    ```
@@ -33,6 +34,14 @@ Marketplace de serviços: usuários podem cadastrar serviços que prestam, procu
 Usuários de teste criados pelo seeder (senha `password` para ambos):
 - `provider@example.com` — tem serviços cadastrados
 - `client@example.com` — tem uma contratação concluída e avaliada
+
+**Upload de imagens (avatar/reviews) no Windows:** se o upload falhar com
+"unable to create a temporary file", o PHP não está achando um
+`upload_tmp_dir` gravável. Defina explicitamente no `php.ini` usado
+(`php --ini` mostra o caminho):
+```
+upload_tmp_dir = "C:\Users\SEU_USUARIO\AppData\Local\Temp"
+```
 
 ### Frontend
 

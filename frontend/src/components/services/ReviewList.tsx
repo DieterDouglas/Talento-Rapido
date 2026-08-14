@@ -19,6 +19,9 @@ export function ReviewList({ reviews }: ReviewListProps) {
             <RatingStars rating={review.rating} />
           </div>
           {review.comment && <p className="mt-2 text-sm text-text-muted">{review.comment}</p>}
+          {review.image_url && (
+            <img src={review.image_url} alt="" className="mt-3 h-32 w-32 rounded-lg object-cover" />
+          )}
         </li>
       ))}
     </ul>

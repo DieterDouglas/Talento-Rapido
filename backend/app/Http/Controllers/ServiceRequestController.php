@@ -15,10 +15,12 @@ class ServiceRequestController extends Controller
         $user = $request->user();
 
         return ServiceRequest::query()
-            ->with(['service', 'requester'])
+            ->with(['service', 'requester', 'review'])
             ->where(
                 fn ($query) => $query->where('requester_id', $user->id)
                     ->orWhereHas('service', fn ($service) => $service->where('user_id', $user->id))
+            )
+            ->when($request->filled('service_id'), fn ($query) => $query->where('service_id', $request->integer('service_id'))
             )
             ->latest()
             ->get();

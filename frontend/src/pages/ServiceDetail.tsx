@@ -4,21 +4,29 @@ import { MapPin } from 'lucide-react'
 import { Header } from '../components/layout/Header'
 import { Button } from '../components/ui/Button'
 import { LinkButton } from '../components/ui/LinkButton'
+import { ReviewForm } from '../components/services/ReviewForm'
 import { ReviewList } from '../components/services/ReviewList'
 import { ServiceRating } from '../components/services/ServiceRating'
 import { ButtonVariant } from '../enums/ButtonVariant'
 import { useService } from '../hooks/useService'
 import { useCreateServiceRequest } from '../hooks/useCreateServiceRequest'
+import { useMyServiceRequestsForService } from '../hooks/useMyServiceRequestsForService'
 import { useAuth } from '../hooks/useAuth'
 import { AppRoute } from '../constants/routes'
 import { formatCurrency } from '../lib/currency'
 
 export function ServiceDetail() {
   const { id } = useParams<{ id: string }>()
+  const serviceId = Number(id)
   const { user } = useAuth()
-  const { data: service, isLoading, isError } = useService(Number(id))
+  const { data: service, isLoading, isError } = useService(serviceId)
+  const { data: myServiceRequests } = useMyServiceRequestsForService(serviceId)
   const createServiceRequest = useCreateServiceRequest()
   const [feedback, setFeedback] = useState<string | null>(null)
+
+  const reviewableRequest = myServiceRequests?.find(
+    (request) => request.requester_id === user?.id && request.status === 'completed' && !request.review
+  )
 
   async function handleHire() {
     if (!service) return
@@ -86,6 +94,16 @@ export function ServiceDetail() {
             </div>
 
             {feedback && <p className="mt-3 text-sm text-text-muted">{feedback}</p>}
+
+            {reviewableRequest && (
+              <div className="mt-6">
+                <ReviewForm
+                  serviceId={service.id}
+                  serviceRequestId={reviewableRequest.id}
+                  onSuccess={() => setFeedback('Avaliação enviada, obrigado!')}
+                />
+              </div>
+            )}
 
             <section className="mt-10">
               <h2 className="text-xl font-bold text-text">Avaliações</h2>
