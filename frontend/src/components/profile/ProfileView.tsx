@@ -1,13 +1,15 @@
 import { MessageCircle, Phone } from 'lucide-react'
 import { Avatar } from '../ui/Avatar'
 import { Button } from '../ui/Button'
+import { Carousel } from '../ui/Carousel'
+import { CarouselItem } from '../ui/CarouselItem'
 import { ButtonVariant } from '../../enums/ButtonVariant'
 import type { User } from '../../types/User'
 import { useMyServices } from '../../hooks/useMyServices'
 import { useMyServiceRequests } from '../../hooks/useMyServiceRequests'
 import { useReceivedServiceRequests } from '../../hooks/useReceivedServiceRequests'
 import { toWhatsAppLink } from '../../lib/phoneMask'
-import { ServiceGrid } from '../services/ServiceGrid'
+import { ServiceCard } from '../services/ServiceCard'
 import { HiredServiceItem } from './HiredServiceItem'
 import { ReceivedServiceRequestItem } from './ReceivedServiceRequestItem'
 
@@ -16,12 +18,10 @@ type ProfileViewProps = {
   onEdit: () => void
 }
 
-
 export function ProfileView({ user, onEdit }: ProfileViewProps) {
-
-  const { data } = useMyServices();
-  const { data: myServiceRequests } = useMyServiceRequests();
-  const { data: receivedServiceRequests } = useReceivedServiceRequests();
+  const { data } = useMyServices()
+  const { data: myServiceRequests } = useMyServiceRequests()
+  const { data: receivedServiceRequests } = useReceivedServiceRequests()
 
   return (
     <div className="w-full">
@@ -66,37 +66,52 @@ export function ProfileView({ user, onEdit }: ProfileViewProps) {
             Editar perfil
           </Button>
         </div>
-        <div className="flex flex-col items-center">
+
+        <div className="flex w-full flex-col items-center">
           <h1 className='text-xl font-bold'>Serviços Prestados</h1>
           {data && data.length > 0 ? (
-            <div className='w-full'>
-              <ServiceGrid services={data} />
+            <div className="mt-4 w-full">
+              <Carousel>
+                {data.map((service) => (
+                  <CarouselItem key={service.id}>
+                    <ServiceCard service={service} />
+                  </CarouselItem>
+                ))}
+              </Carousel>
             </div>
           ) : (
             <div>Sem serviços cadastrados.</div>
           )}
         </div>
 
-        <div className="mt-8 w-full max-w-2xl flex flex-col items-center">
+        <div className="mt-8 w-full flex flex-col items-center">
           <h1 className="text-xl font-bold">Pedidos Recebidos</h1>
           {receivedServiceRequests && receivedServiceRequests.length > 0 ? (
-            <div className="mt-4 flex flex-col md:flex-row w-full gap-4">
-              {receivedServiceRequests.map((request) => (
-                <ReceivedServiceRequestItem key={request.id} request={request} />
-              ))}
+            <div className="mt-4 w-full">
+              <Carousel>
+                {receivedServiceRequests.map((request) => (
+                  <CarouselItem key={request.id}>
+                    <ReceivedServiceRequestItem request={request} />
+                  </CarouselItem>
+                ))}
+              </Carousel>
             </div>
           ) : (
             <div className="mt-4 text-text-muted">Nenhum pedido recebido ainda.</div>
           )}
         </div>
 
-        <div className="mt-8 w-full max-w-2xl flex flex-col items-center">
+        <div className="mt-8 w-full flex flex-col items-center">
           <h1 className="text-xl font-bold">Serviços Contratados</h1>
           {myServiceRequests && myServiceRequests.length > 0 ? (
-            <div className="mt-4 flex flex-col md:flex-row gap-4">
-              {myServiceRequests.map((request) => (
-                <HiredServiceItem key={request.id} request={request} />
-              ))}
+            <div className="mt-4 w-full">
+              <Carousel>
+                {myServiceRequests.map((request) => (
+                  <CarouselItem key={request.id}>
+                    <HiredServiceItem request={request} />
+                  </CarouselItem>
+                ))}
+              </Carousel>
             </div>
           ) : (
             <div className="mt-4 text-text-muted">Você ainda não contratou nenhum serviço.</div>
