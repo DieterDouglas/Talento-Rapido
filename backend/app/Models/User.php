@@ -15,7 +15,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
-#[Fillable(['name', 'email', 'password', 'avatar_path'])]
+#[Fillable(['name', 'email', 'password', 'avatar_path', 'phone', 'is_whatsapp'])]
 #[Hidden(['password', 'remember_token'])]
 #[Appends(['avatar_url'])]
 class User extends Authenticatable
@@ -50,6 +50,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_whatsapp' => 'boolean',
         ];
     }
 }
