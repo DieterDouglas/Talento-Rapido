@@ -4,6 +4,7 @@ export const AppRoute = {
   Register: '/register',
   Services: '/services',
   ServiceDetail: '/services/:id',
+  Profile: '/profile',
 } as const
 
 export type AppRoute = (typeof AppRoute)[keyof typeof AppRoute]

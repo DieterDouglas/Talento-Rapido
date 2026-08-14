@@ -5,6 +5,7 @@ import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Services } from './pages/Services'
 import { ServiceDetail } from './pages/ServiceDetail'
+import { Profile } from './pages/Profile'
 import { AppRoute } from './constants/routes'
 import { AuthProvider } from './contexts/AuthContext'
 
@@ -21,6 +22,7 @@ function App() {
             <Route path={AppRoute.Register} element={<Register />} />
             <Route path={AppRoute.Services} element={<Services />} />
             <Route path={AppRoute.ServiceDetail} element={<ServiceDetail />} />
+            <Route path={AppRoute.Profile} element={<Profile />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
