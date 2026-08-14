@@ -7,7 +7,7 @@ import { HeroImage } from './HeroImage'
 
 export function Hero() {
   return (
-    <section className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2 h-full">
+    <section className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2 h-screen px-8">
       <div className="flex flex-col gap-6">
         <h1 className="text-4xl font-extrabold uppercase leading-tight text-text">
           Serviços variados reunidos em um <Highlight>só lugar</Highlight>.

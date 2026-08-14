@@ -5,6 +5,7 @@ import { ButtonVariant } from '../../enums/ButtonVariant'
 import type { User } from '../../types/User'
 import { useMyServices } from '../../hooks/useMyServices'
 import { useMyServiceRequests } from '../../hooks/useMyServiceRequests'
+import { toWhatsAppLink } from '../../lib/phoneMask'
 import { ServiceGrid } from '../services/ServiceGrid'
 import { HiredServiceItem } from './HiredServiceItem'
 
@@ -33,16 +34,26 @@ export function ProfileView({ user, onEdit }: ProfileViewProps) {
 
           <div className="flex items-center gap-2 text-sm">
             {user.phone ? (
-              <>
-                <Phone className="h-4 w-4 text-text-muted" />
-                <span className="text-text">{user.phone}</span>
-                {user.is_whatsapp && (
+              user.is_whatsapp ? (
+                <a
+                  href={toWhatsAppLink(user.phone)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-text hover:text-primary"
+                >
+                  <Phone className="h-4 w-4 text-text-muted" />
+                  <span>{user.phone}</span>
                   <span className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
                     <MessageCircle className="h-3 w-3" />
                     WhatsApp
                   </span>
-                )}
-              </>
+                </a>
+              ) : (
+                <>
+                  <Phone className="h-4 w-4 text-text-muted" />
+                  <span className="text-text">{user.phone}</span>
+                </>
+              )
             ) : (
               <span className="text-text-muted">Nenhum telefone cadastrado</span>
             )}
@@ -52,7 +63,7 @@ export function ProfileView({ user, onEdit }: ProfileViewProps) {
             Editar perfil
           </Button>
         </div>
-        <div className="flex-col">
+        <div className="flex flex-col items-center">
           <h1 className='text-xl font-bold'>Serviços Prestados</h1>
           {data && data.length > 0 ? (
             <div className='w-full'>
@@ -63,10 +74,10 @@ export function ProfileView({ user, onEdit }: ProfileViewProps) {
           )}
         </div>
 
-        <div className="mt-8 w-full max-w-2xl flex-col">
+        <div className="mt-8 w-full max-w-2xl flex flex-col items-center">
           <h1 className="text-xl font-bold">Serviços Contratados</h1>
           {myServiceRequests && myServiceRequests.length > 0 ? (
-            <div className="mt-4 flex flex-col gap-4">
+            <div className="mt-4 flex gap-4">
               {myServiceRequests.map((request) => (
                 <HiredServiceItem key={request.id} request={request} />
               ))}

@@ -8,3 +8,11 @@ export function formatPhoneNumber(value: string): string {
 
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`
 }
+
+export function toWhatsAppLink(phone: string): string {
+  const digits = phone.replace(/\D/g, '')
+
+  // wa.me exige o número com código do país; o app só cadastra
+  // telefones no formato brasileiro, então 55 é fixo.
+  return `https://wa.me/55${digits}`
+}

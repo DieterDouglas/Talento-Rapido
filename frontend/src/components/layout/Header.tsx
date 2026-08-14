@@ -76,7 +76,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="inset-x-0 top-0 bg-background px-6 py-4 lg:px-10">
+    <header className="inset-x-0 top-0 bg-primary-light px-6 py-4 lg:px-10">
       <div className="flex items-center justify-between">
         <Logo />
 
