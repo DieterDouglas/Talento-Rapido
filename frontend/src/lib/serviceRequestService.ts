@@ -1,4 +1,5 @@
 import { api } from './api'
+import type { ServiceRequestStatus } from '../enums/ServiceRequestStatus'
 import type { ServiceRequestSummary } from '../types/ServiceRequestSummary'
 
 export async function createServiceRequest(serviceId: number): Promise<void> {
@@ -15,6 +16,15 @@ export async function fetchMyServiceRequestsForService(serviceId: number): Promi
 
 export async function fetchMyServiceRequests(): Promise<ServiceRequestSummary[]> {
   const { data } = await api.get<ServiceRequestSummary[]>('/service-requests')
+
+  return data
+}
+
+export async function updateServiceRequestStatus(
+  id: number,
+  status: ServiceRequestStatus
+): Promise<ServiceRequestSummary> {
+  const { data } = await api.patch<ServiceRequestSummary>(`/service-requests/${id}/status`, { status })
 
   return data
 }

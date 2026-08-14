@@ -5,6 +5,7 @@ export type ServiceRequestSummary = {
   service_id: number
   requester_id: number
   status: ServiceRequestStatus
+  requester: { id: number; name: string; avatar_url: string | null }
   service: {
     id: number
     title: string

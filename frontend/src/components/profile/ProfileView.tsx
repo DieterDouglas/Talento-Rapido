@@ -5,9 +5,11 @@ import { ButtonVariant } from '../../enums/ButtonVariant'
 import type { User } from '../../types/User'
 import { useMyServices } from '../../hooks/useMyServices'
 import { useMyServiceRequests } from '../../hooks/useMyServiceRequests'
+import { useReceivedServiceRequests } from '../../hooks/useReceivedServiceRequests'
 import { toWhatsAppLink } from '../../lib/phoneMask'
 import { ServiceGrid } from '../services/ServiceGrid'
 import { HiredServiceItem } from './HiredServiceItem'
+import { ReceivedServiceRequestItem } from './ReceivedServiceRequestItem'
 
 type ProfileViewProps = {
   user: User
@@ -19,6 +21,7 @@ export function ProfileView({ user, onEdit }: ProfileViewProps) {
 
   const { data } = useMyServices();
   const { data: myServiceRequests } = useMyServiceRequests();
+  const { data: receivedServiceRequests } = useReceivedServiceRequests();
 
   return (
     <div className="w-full">
@@ -71,6 +74,19 @@ export function ProfileView({ user, onEdit }: ProfileViewProps) {
             </div>
           ) : (
             <div>Sem serviços cadastrados.</div>
+          )}
+        </div>
+
+        <div className="mt-8 w-full max-w-2xl flex flex-col items-center">
+          <h1 className="text-xl font-bold">Pedidos Recebidos</h1>
+          {receivedServiceRequests && receivedServiceRequests.length > 0 ? (
+            <div className="mt-4 flex w-full flex-col gap-4">
+              {receivedServiceRequests.map((request) => (
+                <ReceivedServiceRequestItem key={request.id} request={request} />
+              ))}
+            </div>
+          ) : (
+            <div className="mt-4 text-text-muted">Nenhum pedido recebido ainda.</div>
           )}
         </div>
 
