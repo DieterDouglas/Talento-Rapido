@@ -1,6 +1,8 @@
 import { Button } from '../ui/Button'
 import { Highlight } from '../ui/Highlight'
+import { LinkButton } from '../ui/LinkButton'
 import { SearchInput } from '../ui/SearchInput'
+import { AppRoute } from '../../constants/routes'
 import { ButtonVariant } from '../../enums/ButtonVariant'
 import { HeroImage } from './HeroImage'
 
@@ -19,9 +21,9 @@ export function Hero() {
         <SearchInput placeholder="O que você precisa ?" />
 
         <div className="flex flex-col gap-3">
-          <Button variant={ButtonVariant.Primary} className="w-full">
+          <LinkButton to={AppRoute.Services} variant={ButtonVariant.Primary} className="w-full">
             Estou procurando um serviço
-          </Button>
+          </LinkButton>
           <Button variant={ButtonVariant.Secondary} className="w-full">
             Quero oferecer meus serviços
           </Button>

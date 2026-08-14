@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
+import { Services } from './pages/Services'
 import { AppRoute } from './constants/routes'
 import { AuthProvider } from './contexts/AuthContext'
 
@@ -17,6 +18,7 @@ function App() {
             <Route path={AppRoute.Home} element={<Home />} />
             <Route path={AppRoute.Login} element={<Login />} />
             <Route path={AppRoute.Register} element={<Register />} />
+            <Route path={AppRoute.Services} element={<Services />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

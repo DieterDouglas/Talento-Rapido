@@ -4,7 +4,7 @@ export function Logo() {
   return (
     <div className="flex items-center gap-1.5 font-bold tracking-wide text-text">
       <Zap className="h-4 w-4 fill-primary text-primary" />
-      <span className="text-sm">TALENTO FAST</span>
+      <span className="text-sm">TALENTO RÁPIDO</span>
     </div>
   )
 }
