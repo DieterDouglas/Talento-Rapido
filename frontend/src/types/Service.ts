@@ -1,4 +1,5 @@
 import type { Category } from './Category'
+import type { Review } from './Review'
 import type { User } from './User'
 
 export type Service = {
@@ -9,4 +10,5 @@ export type Service = {
   location: string | null
   category: Category
   provider: User
+  reviews?: Review[]
 }

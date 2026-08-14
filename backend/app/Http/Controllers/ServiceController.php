@@ -30,7 +30,7 @@ class ServiceController extends Controller
 
     public function show(Service $service): Service
     {
-        return $service->load(['provider', 'category']);
+        return $service->load(['provider', 'category', 'reviews.serviceRequest.requester']);
     }
 
     public function update(UpdateServiceRequest $request, Service $service): Service

@@ -21,6 +21,12 @@ export async function fetchServices(filters: ServiceFilters = {}): Promise<Pagin
   return data
 }
 
+export async function fetchService(id: number): Promise<Service> {
+  const { data } = await api.get<Service>(`/services/${id}`)
+
+  return data
+}
+
 export async function fetchCategories(): Promise<Category[]> {
   const { data } = await api.get<Category[]>('/categories')
 
