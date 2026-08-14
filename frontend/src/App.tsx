@@ -8,6 +8,7 @@ import { CreateService } from './pages/CreateService'
 import { ServiceDetail } from './pages/ServiceDetail'
 import { Profile } from './pages/Profile'
 import { SmartSearch } from './pages/SmartSearch'
+import { About } from './pages/About'
 import { AppRoute } from './constants/routes'
 import { AuthProvider } from './contexts/AuthContext'
 
@@ -27,6 +28,7 @@ function App() {
             <Route path={AppRoute.ServiceDetail} element={<ServiceDetail />} />
             <Route path={AppRoute.Profile} element={<Profile />} />
             <Route path={AppRoute.SmartSearch} element={<SmartSearch />} />
+            <Route path={AppRoute.About} element={<About />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
