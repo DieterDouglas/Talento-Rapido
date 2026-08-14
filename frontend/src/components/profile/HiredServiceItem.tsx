@@ -21,16 +21,19 @@ export function HiredServiceItem({ request }: HiredServiceItemProps) {
   return (
     <div className="rounded-xl border border-primary-light bg-surface p-4">
       <div className="flex items-center justify-between gap-4">
-        <div>
-          <Link to={serviceDetailPath(request.service.id)} className="font-semibold text-text hover:text-primary">
+        <div className="min-w-0">
+          <Link
+            to={serviceDetailPath(request.service.id)}
+            className="block truncate font-semibold text-text hover:text-primary"
+          >
             {request.service.title}
           </Link>
-          <p className="text-sm text-text-muted">
+          <p className="truncate text-sm text-text-muted">
             {request.service.category.name} · {request.service.provider.name}
           </p>
         </div>
 
-        <div className="text-right">
+        <div className="shrink-0 text-right">
           <p className="font-bold text-primary">{formatCurrency(request.service.price)}</p>
           <span className="text-xs font-medium text-text-muted">
             {SERVICE_REQUEST_STATUS_LABELS[request.status]}

@@ -16,17 +16,17 @@ export function ReceivedServiceRequestItem({ request }: ReceivedServiceRequestIt
   const updateStatus = useUpdateServiceRequestStatus()
 
   return (
-    <div className="rounded-xl border border-primary-light bg-surface px-8 py-4">
+    <div className="rounded-xl border border-primary-light bg-surface p-4">
       <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
+        <div className="flex min-w-0 items-center gap-3">
           <Avatar src={request.requester.avatar_url} name={request.requester.name} size={36} />
-          <div>
-            <p className="font-semibold text-text">{request.service.title}</p>
-            <p className="text-sm text-text-muted">Solicitado por {request.requester.name}</p>
+          <div className="min-w-0">
+            <p className="truncate font-semibold text-text">{request.service.title}</p>
+            <p className="truncate text-sm text-text-muted">Solicitado por {request.requester.name}</p>
           </div>
         </div>
 
-        <div className="text-right">
+        <div className="shrink-0 text-right">
           <p className="font-bold text-primary">{formatCurrency(request.service.price)}</p>
           <span className="text-xs font-medium text-text-muted">
             {SERVICE_REQUEST_STATUS_LABELS[request.status]}
