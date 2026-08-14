@@ -96,4 +96,8 @@ class ServiceController extends Controller
 
         return response()->noContent();
     }
+
+    public function me(Request $request){
+        return $request->user()->services()->with(['category', 'provider'])->get();
+    }
 }

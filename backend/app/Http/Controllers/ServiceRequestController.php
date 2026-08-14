@@ -15,7 +15,7 @@ class ServiceRequestController extends Controller
         $user = $request->user();
 
         return ServiceRequest::query()
-            ->with(['service', 'requester', 'review'])
+            ->with(['service.provider', 'service.category', 'requester', 'review'])
             ->where(
                 fn ($query) => $query->where('requester_id', $user->id)
                     ->orWhereHas('service', fn ($service) => $service->where('user_id', $user->id))

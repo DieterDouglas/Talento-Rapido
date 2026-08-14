@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('services', function (Blueprint $table) {
             // 768 dimensões: tamanho do vetor retornado pelo modelo
-            // text-embedding-004 do Gemini.
             $table->vector('embedding', 768)->nullable();
         });
     }

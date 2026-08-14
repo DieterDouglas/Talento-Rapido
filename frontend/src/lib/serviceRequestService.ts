@@ -12,3 +12,9 @@ export async function fetchMyServiceRequestsForService(serviceId: number): Promi
 
   return data
 }
+
+export async function fetchMyServiceRequests(): Promise<ServiceRequestSummary[]> {
+  const { data } = await api.get<ServiceRequestSummary[]>('/service-requests')
+
+  return data
+}

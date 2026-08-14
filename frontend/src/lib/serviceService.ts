@@ -39,6 +39,12 @@ export async function fetchCategories(): Promise<Category[]> {
   return data
 }
 
+export async function fetchMyServices(): Promise<Service[]> {
+  const { data } = await api.get<Service[]>('/me/services')
+
+  return data
+}
+
 export type CreateServicePayload = {
   category_id: number
   title: string

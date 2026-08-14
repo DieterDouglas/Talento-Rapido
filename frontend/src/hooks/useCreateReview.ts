@@ -9,7 +9,7 @@ export function useCreateReview(serviceId: number) {
       createReview(payload.serviceRequestId, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['services', serviceId] })
-      queryClient.invalidateQueries({ queryKey: ['service-requests', { serviceId }] })
+      queryClient.invalidateQueries({ queryKey: ['service-requests'] })
     },
   })
 }

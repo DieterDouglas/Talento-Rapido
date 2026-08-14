@@ -22,7 +22,7 @@ export function Profile() {
     <>
       <Header />
 
-      <main className="mx-auto max-w-md px-10 py-10">
+      <main className="mx-12 px-10 py-10">
         <h1 className="mb-6 text-center text-2xl font-bold text-text">Meu perfil</h1>
 
         {isEditing ? (
