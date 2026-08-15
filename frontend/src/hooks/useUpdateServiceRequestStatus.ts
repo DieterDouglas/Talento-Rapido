@@ -9,7 +9,7 @@ export function useUpdateServiceRequestStatus() {
     mutationFn: ({ id, status }: { id: number; status: ServiceRequestStatus }) =>
       updateServiceRequestStatus(id, status),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['service-requests'] })
+      queryClient.invalidateQueries({ queryKey: ['service-request'] })
     },
   })
 }

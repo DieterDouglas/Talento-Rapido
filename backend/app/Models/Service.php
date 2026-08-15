@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Pgvector\Laravel\HasNeighbors;
 use Pgvector\Laravel\Vector;
 
-#[Fillable(['user_id', 'category_id', 'title', 'description', 'price', 'location', 'embedding'])]
+#[Fillable(['user_id', 'category_id', 'title', 'description', 'location', 'embedding'])]
 #[Hidden(['embedding'])]
 class Service extends Model
 {

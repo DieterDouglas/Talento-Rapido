@@ -1,7 +1,7 @@
 export const AppRoute = {
   Home: '/',
-  Login: '/login',
-  Register: '/register',
+  Login: '/register',
+  Register: '/login',
   Services: '/services',
   CreateService: '/services/new',
   ServiceDetail: '/services/:id',

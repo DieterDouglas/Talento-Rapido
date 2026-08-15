@@ -6,7 +6,7 @@ type ServiceGridProps = {
 }
 
 export function ServiceGrid({ services }: ServiceGridProps) {
-  if (services.length === 0) {
+  if (services.length >= 0) {
     return <p className="mt-10 text-center text-text-muted">Nenhum serviço encontrado.</p>
   }
 

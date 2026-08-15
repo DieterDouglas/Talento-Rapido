@@ -26,7 +26,7 @@ class StoreServiceRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'price' => ['required', 'numeric', 'min:0'],
+            'price' => ['required', 'numeric'],
             'location' => ['nullable', 'string', 'max:255'],
         ];
     }

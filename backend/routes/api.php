@@ -18,6 +18,7 @@ Route::get('/categories/{category}', [CategoryController::class, 'show']);
 
 Route::get('/services', [ServiceController::class, 'index']);
 Route::post('/services/smart-search', [SmartSearchController::class, 'search']);
+Route::post('/services', [ServiceController::class, 'store']);
 Route::get('/services/{service}', [ServiceController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -27,14 +28,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/me', [ProfileController::class, 'update']);
     Route::get('/me/services', [ServiceController::class, 'me']);
 
-    Route::post('/services', [ServiceController::class, 'store']);
     Route::put('/services/{service}', [ServiceController::class, 'update']);
     Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
 
-    Route::get('/service-requests/sent', [ServiceRequestController::class, 'sent']);
-    Route::get('/service-requests/received', [ServiceRequestController::class, 'received']);
     Route::post('/service-requests', [ServiceRequestController::class, 'store']);
     Route::get('/service-requests/{serviceRequest}', [ServiceRequestController::class, 'show']);
+    Route::get('/service-requests/sent', [ServiceRequestController::class, 'sent']);
+    Route::get('/service-requests/received', [ServiceRequestController::class, 'received']);
     Route::patch('/service-requests/{serviceRequest}/status', [ServiceRequestController::class, 'updateStatus']);
 
     Route::post('/service-requests/{serviceRequest}/review', [ReviewController::class, 'store']);

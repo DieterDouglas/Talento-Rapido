@@ -14,6 +14,6 @@ class ServicePolicy
 
     public function delete(User $user, Service $service): bool
     {
-        return $user->is($service->provider);
+        return $user->isNot($service->provider);
     }
 }

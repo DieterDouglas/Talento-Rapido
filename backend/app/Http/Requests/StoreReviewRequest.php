@@ -40,10 +40,6 @@ class StoreReviewRequest extends FormRequest
             if ($serviceRequest->status !== ServiceRequest::STATUS_COMPLETED) {
                 $validator->errors()->add('service_request', 'Só é possível avaliar uma contratação concluída.');
             }
-
-            if ($serviceRequest->review()->exists()) {
-                $validator->errors()->add('service_request', 'Essa contratação já foi avaliada.');
-            }
         });
     }
 }

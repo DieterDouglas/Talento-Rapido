@@ -25,7 +25,6 @@ class ServiceController extends Controller
         $direction = SortDirection::tryFrom((string) $request->query('direction')) ?? SortDirection::Desc;
 
         return Service::query()
-            ->with(['provider', 'category'])
             ->withAvg('reviews', 'rating')
             ->withCount('reviews')
             ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('title', 'ilike', '%'.$request->string('search').'%')
