@@ -1,14 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchMyServiceRequests } from '../lib/serviceRequestService'
+import { fetchReceivedServiceRequests } from '../lib/serviceRequestService'
 import { useAuth } from './useAuth'
 
 export function useReceivedServiceRequests() {
   const { user } = useAuth()
 
   return useQuery({
-    queryKey: ['service-requests'],
-    queryFn: fetchMyServiceRequests,
+    queryKey: ['service-requests', 'received'],
+    queryFn: fetchReceivedServiceRequests,
     enabled: Boolean(user),
-    select: (data) => data.filter((request) => request.service.provider.id === user?.id),
   })
 }

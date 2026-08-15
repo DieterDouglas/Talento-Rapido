@@ -19,7 +19,7 @@ export function HiredServiceItem({ request }: HiredServiceItemProps) {
   const canReview = request.status === ServiceRequestStatus.Completed && !request.review
 
   return (
-    <div className="rounded-xl border border-primary-light bg-surface p-4">
+    <div className="flex h-full flex-col rounded-xl border border-primary-light bg-surface p-4">
       <div className="flex items-center justify-between gap-4">
         <div className="min-w-0">
           <Link
@@ -41,33 +41,35 @@ export function HiredServiceItem({ request }: HiredServiceItemProps) {
         </div>
       </div>
 
-      {request.review && (
-        <div className="mt-3 flex items-start gap-3">
-          <div>
-            <RatingStars rating={request.review.rating} />
-            {request.review.comment && <p className="mt-1 text-sm text-text-muted">{request.review.comment}</p>}
+      <div className="mt-auto pt-3">
+        {request.review && (
+          <div className="flex items-start gap-3">
+            <div>
+              <RatingStars rating={request.review.rating} />
+              {request.review.comment && (
+                <p className="mt-1 line-clamp-2 text-sm text-text-muted">{request.review.comment}</p>
+              )}
+            </div>
+            {request.review.image_url && (
+              <img src={request.review.image_url} alt="" className="h-16 w-16 shrink-0 rounded-lg object-cover" />
+            )}
           </div>
-          {request.review.image_url && (
-            <img src={request.review.image_url} alt="" className="h-16 w-16 rounded-lg object-cover" />
-          )}
-        </div>
-      )}
+        )}
 
-      {canReview && !isReviewing && (
-        <Button variant={ButtonVariant.Secondary} className="mt-3" onClick={() => setIsReviewing(true)}>
-          Avaliar
-        </Button>
-      )}
+        {canReview && !isReviewing && (
+          <Button variant={ButtonVariant.Secondary} onClick={() => setIsReviewing(true)}>
+            Avaliar
+          </Button>
+        )}
 
-      {canReview && isReviewing && (
-        <div className="mt-3">
+        {canReview && isReviewing && (
           <ReviewForm
             serviceId={request.service.id}
             serviceRequestId={request.id}
             onSuccess={() => setIsReviewing(false)}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

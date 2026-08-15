@@ -6,16 +6,22 @@ export async function createServiceRequest(serviceId: number): Promise<void> {
   await api.post('/service-requests', { service_id: serviceId })
 }
 
-export async function fetchMyServiceRequestsForService(serviceId: number): Promise<ServiceRequestSummary[]> {
-  const { data } = await api.get<ServiceRequestSummary[]>('/service-requests', {
+export async function fetchSentServiceRequestsForService(serviceId: number): Promise<ServiceRequestSummary[]> {
+  const { data } = await api.get<ServiceRequestSummary[]>('/service-requests/sent', {
     params: { service_id: serviceId },
   })
 
   return data
 }
 
-export async function fetchMyServiceRequests(): Promise<ServiceRequestSummary[]> {
-  const { data } = await api.get<ServiceRequestSummary[]>('/service-requests')
+export async function fetchSentServiceRequests(): Promise<ServiceRequestSummary[]> {
+  const { data } = await api.get<ServiceRequestSummary[]>('/service-requests/sent')
+
+  return data
+}
+
+export async function fetchReceivedServiceRequests(): Promise<ServiceRequestSummary[]> {
+  const { data } = await api.get<ServiceRequestSummary[]>('/service-requests/received')
 
   return data
 }

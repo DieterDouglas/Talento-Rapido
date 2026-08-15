@@ -14,7 +14,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
   return (
     <Link
       to={serviceDetailPath(service.id)}
-      className="flex flex-col gap-3 rounded-xl border border-primary-light bg-surface p-5 transition-shadow hover:shadow-md"
+      className="flex h-full flex-col gap-3 rounded-xl border border-primary-light bg-surface p-5 transition-shadow hover:shadow-md"
     >
       <span className="w-fit rounded-full bg-primary-light px-3 py-1 text-xs font-medium text-primary">
         {service.category.name}

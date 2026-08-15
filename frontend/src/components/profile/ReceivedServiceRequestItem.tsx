@@ -16,7 +16,7 @@ export function ReceivedServiceRequestItem({ request }: ReceivedServiceRequestIt
   const updateStatus = useUpdateServiceRequestStatus()
 
   return (
-    <div className="rounded-xl border border-primary-light bg-surface p-4">
+    <div className="flex h-full flex-col rounded-xl border border-primary-light bg-surface p-4">
       <div className="flex items-center justify-between gap-4">
         <div className="flex min-w-0 items-center gap-3">
           <Avatar src={request.requester.avatar_url} name={request.requester.name} size={36} />
@@ -38,50 +38,54 @@ export function ReceivedServiceRequestItem({ request }: ReceivedServiceRequestIt
         <p className="mt-3 text-sm text-red-600">Não foi possível atualizar o pedido. Tente novamente.</p>
       )}
 
-      {request.status === ServiceRequestStatus.Pending && (
-        <div className="mt-3 flex gap-2">
-          <Button
-            variant={ButtonVariant.Primary}
-            disabled={updateStatus.isPending}
-            onClick={() => updateStatus.mutate({ id: request.id, status: ServiceRequestStatus.Accepted })}
-          >
-            Aceitar
-          </Button>
-          <Button
-            variant={ButtonVariant.Secondary}
-            disabled={updateStatus.isPending}
-            onClick={() => updateStatus.mutate({ id: request.id, status: ServiceRequestStatus.Cancelled })}
-          >
-            Recusar
-          </Button>
-        </div>
-      )}
+      <div className="mt-auto pt-3">
+        {request.status === ServiceRequestStatus.Pending && (
+          <div className="flex gap-2">
+            <Button
+              variant={ButtonVariant.Primary}
+              disabled={updateStatus.isPending}
+              onClick={() => updateStatus.mutate({ id: request.id, status: ServiceRequestStatus.Accepted })}
+            >
+              Aceitar
+            </Button>
+            <Button
+              variant={ButtonVariant.Secondary}
+              disabled={updateStatus.isPending}
+              onClick={() => updateStatus.mutate({ id: request.id, status: ServiceRequestStatus.Cancelled })}
+            >
+              Recusar
+            </Button>
+          </div>
+        )}
 
-      {request.status === ServiceRequestStatus.Accepted && (
-        <div className="mt-3 flex gap-2">
-          <Button
-            variant={ButtonVariant.Primary}
-            disabled={updateStatus.isPending}
-            onClick={() => updateStatus.mutate({ id: request.id, status: ServiceRequestStatus.Completed })}
-          >
-            Marcar como concluído
-          </Button>
-          <Button
-            variant={ButtonVariant.Secondary}
-            disabled={updateStatus.isPending}
-            onClick={() => updateStatus.mutate({ id: request.id, status: ServiceRequestStatus.Cancelled })}
-          >
-            Cancelar
-          </Button>
-        </div>
-      )}
+        {request.status === ServiceRequestStatus.Accepted && (
+          <div className="flex gap-2">
+            <Button
+              variant={ButtonVariant.Primary}
+              disabled={updateStatus.isPending}
+              onClick={() => updateStatus.mutate({ id: request.id, status: ServiceRequestStatus.Completed })}
+            >
+              Marcar como concluído
+            </Button>
+            <Button
+              variant={ButtonVariant.Secondary}
+              disabled={updateStatus.isPending}
+              onClick={() => updateStatus.mutate({ id: request.id, status: ServiceRequestStatus.Cancelled })}
+            >
+              Cancelar
+            </Button>
+          </div>
+        )}
 
-      {request.status === ServiceRequestStatus.Completed && request.review && (
-        <div className="mt-3 flex items-center gap-2">
-          <RatingStars rating={request.review.rating} />
-          {request.review.comment && <p className="text-sm text-text-muted">{request.review.comment}</p>}
-        </div>
-      )}
+        {request.status === ServiceRequestStatus.Completed && request.review && (
+          <div className="flex items-center gap-2">
+            <RatingStars rating={request.review.rating} />
+            {request.review.comment && (
+              <p className="line-clamp-2 text-sm text-text-muted">{request.review.comment}</p>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

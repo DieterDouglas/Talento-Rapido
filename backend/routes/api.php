@@ -31,7 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/services/{service}', [ServiceController::class, 'update']);
     Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
 
-    Route::get('/service-requests', [ServiceRequestController::class, 'index']);
+    Route::get('/service-requests/sent', [ServiceRequestController::class, 'sent']);
+    Route::get('/service-requests/received', [ServiceRequestController::class, 'received']);
     Route::post('/service-requests', [ServiceRequestController::class, 'store']);
     Route::get('/service-requests/{serviceRequest}', [ServiceRequestController::class, 'show']);
     Route::patch('/service-requests/{serviceRequest}/status', [ServiceRequestController::class, 'updateStatus']);

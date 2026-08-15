@@ -10,18 +10,30 @@ use Illuminate\Http\Request;
 
 class ServiceRequestController extends Controller
 {
-    public function index(Request $request): Collection
+    public function sent(Request $request): Collection
     {
-        $user = $request->user();
-
         return ServiceRequest::query()
+            ->where('requester_id', $request->user()->id)
             ->with(['service.provider', 'service.category', 'requester', 'review'])
-            ->where(
-                fn ($query) => $query->where('requester_id', $user->id)
-                    ->orWhereHas('service', fn ($service) => $service->where('user_id', $user->id))
-            )
             ->when($request->filled('service_id'), fn ($query) => $query->where('service_id', $request->integer('service_id'))
             )
+            ->latest()
+            ->get();
+    }
+
+    public function received(Request $request): Collection
+    {
+        // Pendente > aceito > concluído > cancelado — dá mais destaque
+        // pro que ainda precisa de uma ação do prestador. A ordem vem
+        // direto de ServiceRequest::STATUSES, sem duplicar os valores.
+        $priorityCases = collect(ServiceRequest::STATUSES)
+            ->map(fn (string $status, int $priority) => "WHEN '{$status}' THEN {$priority}")
+            ->implode(' ');
+
+        return ServiceRequest::query()
+            ->whereHas('service', fn ($query) => $query->where('user_id', $request->user()->id))
+            ->with(['service.provider', 'service.category', 'requester', 'review'])
+            ->orderByRaw("CASE status {$priorityCases} END")
             ->latest()
             ->get();
     }
