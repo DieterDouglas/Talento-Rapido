@@ -16,10 +16,10 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-scripts --no-interaction --prefer-dist --optimize-autoloader
+RUN composer install --no-scripts --no-interaction --prefer-dist --optimize-autoloader
 
 COPY . .
-RUN composer dump-autoload --optimize --no-dev
+RUN composer dump-autoload --optimize
 
 RUN mkdir -p storage/framework/{cache,sessions,testing,views} storage/logs \
     && chmod -R 775 storage bootstrap/cache
