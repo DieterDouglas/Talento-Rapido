@@ -54,7 +54,7 @@ services:
       - key: QUEUE_CONNECTION
         value: database
       - key: LOG_CHANNEL
-        value: stack
+        value: stderr
       - key: LOG_LEVEL
         value: error
       - key: FILESYSTEM_DISK
