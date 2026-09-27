@@ -1,5 +1,7 @@
+import heroImage from '../../assets/hero_image.png'
+
 export function HeroImage() {
   return (
-    <img src='/src/assets/hero_image.png' className="rounded-full"></img>
+    <img src={heroImage} className="rounded-full"></img>
   )
 }
